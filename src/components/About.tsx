@@ -3,11 +3,10 @@ import {
   Code2,
   Server,
   Cpu,
-  GraduationCap,
   Briefcase,
   User,
 } from 'lucide-react';
-import { experienceData, educationData } from '../data/experienceData';
+import { experienceData } from '../data/experienceData';
 
 export const About: React.FC = () => {
   return (
@@ -144,93 +143,53 @@ export const About: React.FC = () => {
           </div>
         </div>
 
-        {/* Experience & Education Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Professional Experience Column */}
-          <div className="lg:col-span-7 flex flex-col gap-6">
-            <div className="flex items-center gap-2 text-slate-900 dark:text-white font-semibold text-lg">
-              <Briefcase className="w-5 h-5 text-indigo-500" />
-              <span>Professional Experience</span>
-            </div>
-
-            {experienceData.map((exp) => (
-              <div
-                key={exp.id}
-                className="glass-panel rounded-2xl p-6 border border-black/5 dark:border-white/10 hover:border-indigo-500/30 transition-all"
-              >
-                <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
-                  <div>
-                    <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
-                      {exp.role}
-                    </h4>
-                    <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400">
-                      {exp.company} • <span className="text-slate-500 dark:text-slate-400">{exp.location}</span>
-                    </p>
-                  </div>
-                  <span className="px-3 py-1 rounded-full text-xs font-mono glass-panel-subtle text-slate-600 dark:text-slate-300">
-                    {exp.period}
-                  </span>
-                </div>
-
-                <ul className="space-y-2 mt-4 text-sm text-slate-600 dark:text-slate-300">
-                  {exp.responsibilities.map((resp, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 flex-shrink-0" />
-                      <span>{resp}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-5 pt-4 border-t border-black/5 dark:border-white/10 flex flex-wrap gap-2">
-                  {exp.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1 rounded-lg text-xs font-mono bg-black/5 dark:bg-white/5 text-slate-700 dark:text-slate-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+        {/* Professional Experience Highlights */}
+        <div className="w-full max-w-4xl mx-auto flex flex-col gap-6">
+          <div className="flex items-center gap-2 text-slate-900 dark:text-white font-semibold text-lg">
+            <Briefcase className="w-5 h-5 text-indigo-500" />
+            <span>Professional Experience</span>
           </div>
 
-          {/* Education Column */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="flex items-center gap-2 text-slate-900 dark:text-white font-semibold text-lg">
-              <GraduationCap className="w-5 h-5 text-indigo-500" />
-              <span>Academic Education</span>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              {educationData.map((edu) => (
-                <div
-                  key={edu.id}
-                  className="glass-panel rounded-2xl p-5 border border-black/5 dark:border-white/10 hover:border-indigo-500/20 transition-all"
-                >
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <span className="text-xs font-mono text-indigo-600 dark:text-indigo-400">
-                      {edu.period}
-                    </span>
-                  </div>
-                  <h4 className="text-base font-bold text-slate-900 dark:text-white">
-                    {edu.degree}
+          {experienceData.map((exp) => (
+            <div
+              key={exp.id}
+              className="glass-panel rounded-2xl p-6 border border-black/5 dark:border-white/10 hover:border-indigo-500/30 transition-all"
+            >
+              <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+                <div>
+                  <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                    {exp.role}
                   </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    {edu.institution}, {edu.location}
+                  <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400">
+                    {exp.company} • <span className="text-slate-500 dark:text-slate-400">{exp.location}</span>
                   </p>
-                  <div className="mt-3 space-y-1">
-                    {edu.highlights.map((item, idx) => (
-                      <p key={idx} className="text-xs text-slate-600 dark:text-slate-300 flex items-center gap-1.5">
-                        <span className="w-1 h-1 rounded-full bg-slate-400 dark:bg-slate-500" />
-                        {item}
-                      </p>
-                    ))}
-                  </div>
                 </div>
-              ))}
+                <span className="px-3 py-1 rounded-full text-xs font-mono glass-panel-subtle text-slate-600 dark:text-slate-300">
+                  {exp.period}
+                </span>
+              </div>
+
+              <ul className="space-y-2 mt-4 text-sm text-slate-600 dark:text-slate-300">
+                {exp.responsibilities.map((resp, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 flex-shrink-0" />
+                    <span>{resp}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-5 pt-4 border-t border-black/5 dark:border-white/10 flex flex-wrap gap-2">
+                {exp.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-2.5 py-1 rounded-lg text-xs font-mono bg-black/5 dark:bg-white/5 text-slate-700 dark:text-slate-300"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
