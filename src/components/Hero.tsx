@@ -45,14 +45,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCaseStudy }) => {
   return (
     <section
       id="home"
-      className="relative pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-36 md:pb-24 overflow-hidden"
+      className="relative pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-36 md:pb-24 overflow-hidden w-full max-w-full"
     >
-      {/* VisionOS Ambient Multi-hue Backlight Auras - Responsively sized */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 w-[340px] sm:w-[600px] lg:w-[1100px] h-[340px] sm:h-[450px] lg:h-[550px] bg-gradient-to-b from-indigo-500/15 via-purple-500/10 to-transparent rounded-full blur-[100px] sm:blur-[160px] pointer-events-none -z-10" />
-      <div className="absolute top-1/4 -left-20 w-64 sm:w-96 lg:w-[450px] h-64 sm:h-96 lg:h-[450px] bg-cyan-500/10 rounded-full blur-[90px] sm:blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute bottom-10 -right-20 w-64 sm:w-96 lg:w-[450px] h-64 sm:h-96 lg:h-[450px] bg-indigo-600/10 rounded-full blur-[90px] sm:blur-[140px] pointer-events-none -z-10" />
+      {/* VisionOS Ambient Multi-hue Backlight Auras - Contained */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 w-full max-w-full">
+        <div className="absolute top-6 left-1/2 -translate-x-1/2 w-[340px] sm:w-[600px] lg:w-[1100px] h-[340px] sm:h-[450px] lg:h-[550px] bg-gradient-to-b from-indigo-500/15 via-purple-500/10 to-transparent rounded-full blur-[100px] sm:blur-[160px]" />
+        <div className="absolute top-1/4 -left-20 w-64 sm:w-96 lg:w-[450px] h-64 sm:h-96 lg:h-[450px] bg-cyan-500/10 rounded-full blur-[90px] sm:blur-[140px]" />
+        <div className="absolute bottom-10 -right-20 w-64 sm:w-96 lg:w-[450px] h-64 sm:h-96 lg:h-[450px] bg-indigo-600/10 rounded-full blur-[90px] sm:blur-[140px]" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ================================================================= */}
         {/* MAIN SPLIT STAGE: Left Narrative & Right LinkedIn Photo Spotlight */}
         {/* ================================================================= */}
@@ -199,9 +201,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCaseStudy }) => {
           {/* ------------------------------------------------------------- */}
           {/* RIGHT COLUMN: LinkedIn Profile Photo Showcase & Dynamic Hub  */}
           {/* ------------------------------------------------------------- */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center relative z-10 w-full">
+          <div className="lg:col-span-5 flex flex-col items-center justify-center relative z-10 w-full max-w-full">
             {/* Ambient Multi-Layer Backlight Glow */}
-            <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-500/20 via-purple-500/20 to-pink-500/15 rounded-3xl blur-2xl pointer-events-none -z-10" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-purple-500/20 to-pink-500/15 rounded-3xl blur-2xl pointer-events-none -z-10" />
 
             {/* The Glass Showcase Frame */}
             <div className="w-full max-w-sm sm:max-w-md mx-auto rounded-3xl glass-panel p-4 sm:p-6 border border-black/10 dark:border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-xl">

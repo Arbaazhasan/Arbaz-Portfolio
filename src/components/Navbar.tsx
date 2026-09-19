@@ -36,13 +36,13 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full max-w-full transition-all duration-300 ${
         isScrolled
           ? 'py-3 bg-white/75 dark:bg-slate-950/75 backdrop-blur-2xl border-b border-black/5 dark:border-white/10 shadow-sm dark:shadow-2xl'
           : 'py-5 bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo / Monogram */}
           <a

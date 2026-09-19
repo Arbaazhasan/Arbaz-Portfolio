@@ -45,12 +45,14 @@ export const Academics: React.FC = () => {
   ];
 
   return (
-    <section id="academics" className="py-20 md:py-28 relative overflow-hidden">
+    <section id="academics" className="py-20 md:py-28 relative overflow-hidden w-full max-w-full">
       {/* Ambient background glow */}
-      <div className="absolute top-1/3 -right-40 w-96 h-96 bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute bottom-10 -left-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 w-full max-w-full">
+        <div className="absolute top-1/3 -right-40 w-96 h-96 bg-indigo-500/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-10 -left-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px]" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel-subtle text-xs font-mono text-indigo-600 dark:text-indigo-400 mb-3 border border-black/5 dark:border-white/10">
@@ -69,13 +71,13 @@ export const Academics: React.FC = () => {
         {/* ============================================================= */}
         {/* SPOTLIGHT BANNER: Convocation & University Foundation Card   */}
         {/* ============================================================= */}
-        <div className="mb-12 sm:mb-14 rounded-3xl glass-panel p-4 sm:p-8 lg:p-10 border border-black/10 dark:border-white/10 shadow-xl relative overflow-hidden">
+        <div className="mb-12 sm:mb-14 rounded-3xl glass-panel p-4 sm:p-8 lg:p-10 border border-black/10 dark:border-white/10 shadow-xl relative overflow-hidden w-full max-w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             {/* Left Photo Showcase: Arbaz with TMU Convocation Folder */}
-            <div className="lg:col-span-4 flex justify-center">
+            <div className="lg:col-span-4 flex justify-center w-full">
               <div className="relative group/photo max-w-[280px] w-full">
                 {/* Glow ring */}
-                <div className="absolute -inset-2 bg-gradient-to-tr from-indigo-500/30 to-purple-500/30 rounded-3xl blur-xl opacity-75 group-hover/photo:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/30 to-purple-500/30 rounded-3xl blur-xl opacity-75 group-hover/photo:opacity-100 transition-opacity" />
 
                 <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-black/10 dark:border-white/20 shadow-2xl bg-slate-900">
                   <img

@@ -10,8 +10,8 @@ import { experienceData, achievementsData } from '../data/experienceData';
 
 export const Experience: React.FC = () => {
   return (
-    <section id="experience" className="py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-20 md:py-28 relative overflow-hidden w-full max-w-full">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel-subtle text-xs font-mono text-indigo-600 dark:text-indigo-400 mb-3 border border-black/5 dark:border-white/10">
@@ -26,9 +26,9 @@ export const Experience: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full">
           {/* Left: Experience Timeline */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-6 w-full min-w-0">
             <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-lg mb-2">
               <Briefcase className="w-5 h-5 text-indigo-500" />
               <span>Professional Trajectory</span>
@@ -37,7 +37,7 @@ export const Experience: React.FC = () => {
             {experienceData.map((exp) => (
               <div
                 key={exp.id}
-                className="relative rounded-3xl glass-panel p-6 sm:p-8 border border-black/10 dark:border-white/10 shadow-xl hover:border-indigo-500/30 transition-all duration-300"
+                className="relative rounded-3xl glass-panel p-4 sm:p-8 border border-black/10 dark:border-white/10 shadow-xl hover:border-indigo-500/30 transition-all duration-300 w-full max-w-full overflow-hidden"
               >
                 {/* Header info */}
                 <div className="flex flex-wrap items-start justify-between gap-2 mb-4">

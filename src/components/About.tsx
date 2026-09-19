@@ -11,8 +11,8 @@ import { experienceData, educationData } from '../data/experienceData';
 
 export const About: React.FC = () => {
   return (
-    <section id="about" className="py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-20 md:py-28 relative overflow-hidden w-full max-w-full">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel-subtle text-xs font-mono text-indigo-600 dark:text-indigo-400 mb-3 border border-black/5 dark:border-white/10">
@@ -29,7 +29,7 @@ export const About: React.FC = () => {
         </div>
 
         {/* Narrative Storytelling Card: "A little about the person behind the code" */}
-        <div className="mb-16 rounded-3xl glass-panel p-6 sm:p-10 border border-black/10 dark:border-white/10 shadow-xl relative overflow-hidden">
+        <div className="mb-16 rounded-3xl glass-panel p-4 sm:p-8 lg:p-10 border border-black/10 dark:border-white/10 shadow-xl relative overflow-hidden w-full max-w-full">
           {/* Subtle luminous background ambient glow */}
           <div className="absolute top-0 right-1/4 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
 

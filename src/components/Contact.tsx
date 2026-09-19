@@ -149,11 +149,11 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 relative">
+    <section id="contact" className="py-20 md:py-28 relative overflow-hidden w-full max-w-full">
       {/* Background illumination */}
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel-subtle text-xs font-mono text-indigo-600 dark:text-indigo-400 mb-3 border border-black/5 dark:border-white/10">
@@ -169,7 +169,7 @@ export const Contact: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start w-full">
           {/* Left Column: Direct Contact Details & Links */}
           <div className="lg:col-span-5 space-y-6">
             <div className="rounded-3xl glass-panel p-6 sm:p-8 border border-black/10 dark:border-white/10 shadow-xl space-y-6">

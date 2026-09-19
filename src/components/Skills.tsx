@@ -71,8 +71,8 @@ export const Skills: React.FC = () => {
   const currentCategory = skillsCategories.find((c) => c.id === selectedCategoryId);
 
   return (
-    <section id="skills" className="py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-20 md:py-28 relative overflow-hidden w-full max-w-full">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel-subtle text-xs font-mono text-indigo-600 dark:text-indigo-400 mb-3 border border-black/5 dark:border-white/10">
@@ -211,14 +211,14 @@ export const Skills: React.FC = () => {
             </div>
 
             {/* SPREAD OUT GRID: Each item has prominent ICON on TOP and NAME on the BOTTOM */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-5 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-6 w-full max-w-full">
               {currentCategory.skills.map((skill: SkillItem) => {
                 const IconComponent = getTechIcon(skill.name);
 
                 return (
                   <div
                     key={skill.name}
-                    className={`group relative rounded-3xl glass-panel p-6 sm:p-8 flex flex-col items-center justify-center text-center border transition-all duration-300 hover:-translate-y-1.5 shadow-lg ${
+                    className={`group relative rounded-3xl glass-panel p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center text-center border transition-all duration-300 hover:-translate-y-1.5 shadow-lg ${
                       skill.highlight
                         ? 'border-indigo-500/30 hover:border-indigo-500 shadow-indigo-500/5 hover:shadow-indigo-500/15'
                         : 'border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20'
