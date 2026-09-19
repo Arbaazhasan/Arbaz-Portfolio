@@ -1,0 +1,400 @@
+import { Project } from '../types';
+
+export const projectsData: Project[] = [
+  {
+    id: 'distributed-media-platform',
+    title: 'Distributed Media Processing Platform',
+    subtitle: 'Microservices & Asynchronous Video Transcoding Engine',
+    shortDescription:
+      'A microservices-based distributed media-processing platform designed to ingest, process, transcode, and encode videos asynchronously with real-time WebSocket telemetry.',
+    featuredBadge: 'Featured Architecture',
+    tags: [
+      'Node.js',
+      'Express',
+      'BullMQ',
+      'Redis',
+      'Socket.IO',
+      'Docker',
+      'React',
+      'FFmpeg',
+      'Cloudinary',
+    ],
+    metrics: [
+      { label: 'Resolutions', value: '1080p, 720p, 360p' },
+      { label: 'Telemetry', value: 'Sub-second Socket.IO' },
+      { label: 'Architecture', value: 'Decoupled Microservices' },
+    ],
+    keyFeatures: [
+      'Express API Gateway managing authenticated ingestion & payload dispatch',
+      'Asynchronous Worker Nodes decoupled from HTTP request-response cycle',
+      'BullMQ and Redis-backed distributed job queues with retry mechanisms',
+      'Real-time signaling server using Socket.IO for progressive status feeds',
+      'Automated video transcoding pipeline leveraging FFmpeg CLI bindings',
+      'Multi-resolution encoding (360p, 720p, 1080p) with strict aspect-ratio preservation',
+      'Cloudinary cloud storage integration for processed video asset delivery',
+      'Redis Pub/Sub channels broadcasting transcoding progress across instances',
+      'Docker Compose orchestration for multi-container development & isolation',
+    ],
+    architectureHighlights: [
+      'Stateless API Gateway enabling horizontal scalability',
+      'BullMQ Redis queue for backpressure control and crash-resilient tasks',
+      'FFmpeg worker pool isolated from API event loop to avoid CPU starvation',
+      'Bidirectional WebSocket event pipeline streaming transcoding percentages to UI',
+    ],
+    githubUrl: 'https://github.com/Arbaazhasan/Distributed-Media-Platform',
+    liveUrl: 'https://distributed-media-platform.vercel.app',
+    caseStudy: {
+      problemStatement:
+        'Video transcoding is an inherently CPU- and I/O-intensive workload. Handling video encoding directly within standard synchronous HTTP request-response cycles causes event loop starvation in Node.js, gateway request timeouts, unhandled process crashes, and a complete lack of real-time progress feedback for end-users.',
+      solutionOverview:
+        'Architected a decoupled, microservices-driven distributed pipeline. The client submits video files to an Express API Gateway, which enqueues transcoding jobs into a BullMQ queue backed by Redis. Dedicated worker processes pick up jobs asynchronously, run FFmpeg transcoding jobs into 360p, 720p, and 1080p formats while maintaining original aspect ratios, upload final artifacts to Cloudinary, and emit granular progress updates via Redis Pub/Sub back to the user via WebSockets.',
+      architectureDescription:
+        'The architecture cleanly decouples ingestion from heavy processing. The API Gateway remains lightweight and responsive, accepting media and publishing tasks to Redis BullMQ. Worker nodes autonomously consume jobs from the queue, execute FFmpeg child processes, and stream percent-completion events to Redis Pub/Sub. The Socket.IO signaling layer consumes these events and pushes live updates to the React client.',
+      architectureNodes: [
+        {
+          id: 'client-ui',
+          name: 'React Client UI',
+          role: 'Client Interface',
+          iconName: 'Layout',
+          tech: 'React, Tailwind CSS',
+          details: 'Provides video upload interface, live progress bars, and streaming player preview.',
+        },
+        {
+          id: 'api-gateway',
+          name: 'API Gateway',
+          role: 'Ingestion & Auth',
+          iconName: 'Server',
+          tech: 'Node.js, Express',
+          details: 'Validates requests, orchestrates upload metadata, and delegates jobs to queue without blocking.',
+        },
+        {
+          id: 'job-queue',
+          name: 'BullMQ Queue',
+          role: 'Distributed Job Scheduler',
+          iconName: 'Layers',
+          tech: 'BullMQ, Redis',
+          details: 'Manages job priority, retries, concurrency controls, and failure queues.',
+        },
+        {
+          id: 'redis-store',
+          name: 'Redis In-Memory',
+          role: 'State & Pub/Sub',
+          iconName: 'Database',
+          tech: 'Redis 7.x',
+          details: 'Stores transient job states and provides low-latency Pub/Sub message broker.',
+        },
+        {
+          id: 'worker-nodes',
+          name: 'Worker Nodes',
+          role: 'Asynchronous Processors',
+          iconName: 'Cpu',
+          tech: 'Node.js Cluster, Child Process',
+          details: 'Autonomous workers consuming jobs from BullMQ queue, handling heavy computational tasks.',
+        },
+        {
+          id: 'ffmpeg-engine',
+          name: 'FFmpeg Transcoder',
+          role: 'Video Processing Engine',
+          iconName: 'Film',
+          tech: 'FFmpeg CLI',
+          details: 'Encodes raw video into 1080p, 720p, and 360p with audio sync and aspect-ratio preservation.',
+        },
+        {
+          id: 'cloudinary-storage',
+          name: 'Cloud Storage',
+          role: 'Asset Delivery & CDN',
+          iconName: 'Cloud',
+          tech: 'Cloudinary CDN',
+          details: 'Persists transcoded assets and serves optimized video streams via global edge CDN.',
+        },
+        {
+          id: 'socket-signaling',
+          name: 'Socket.IO Server',
+          role: 'Real-Time Signaling',
+          iconName: 'Radio',
+          tech: 'Socket.IO, Redis Adapter',
+          details: 'Listens to Redis Pub/Sub events and broadcasts live progress ticks to connected client sockets.',
+        },
+      ],
+      technologyDecisions: [
+        {
+          technology: 'BullMQ & Redis',
+          reason: 'Provides robust job persistence, automatic exponential retries, and clean separation between API and worker processes.',
+          tradeoff: 'Requires maintaining a persistent Redis cache layer, but eliminates CPU-bound bottlenecks on the HTTP thread.',
+        },
+        {
+          technology: 'Socket.IO with Redis Adapter',
+          reason: 'Enables instant bidirectional communication to relay transcoding progress increments (0-100%) to users without client polling.',
+          tradeoff: 'Requires stateful connection management; solved by abstracting the socket gateway and using Redis pub/sub.',
+        },
+        {
+          technology: 'FFmpeg Subprocess Execution',
+          reason: 'Industry-standard multimedia processing binary delivering battle-tested transcoding performance and codec support.',
+          tradeoff: 'Resource intensive on worker CPU; mitigated by containerizing workers and restricting concurrency per node.',
+        },
+        {
+          technology: 'Docker Compose Orchestration',
+          reason: 'Enables one-command reproducible environments bundling the Gateway, Workers, Redis instance, and local development test harness.',
+          tradeoff: 'Initial container image size is slightly larger due to bundled FFmpeg binaries.',
+        },
+      ],
+      processingWorkflow: [
+        {
+          step: 1,
+          title: 'Client Ingestion & Validation',
+          description: 'The user selects a video file. The React client initiates an upload to the API Gateway, which validates container format, size limits, and user authentication.',
+          badge: 'Ingress',
+        },
+        {
+          step: 2,
+          title: 'BullMQ Queue Dispatch',
+          description: 'The API Gateway generates a unique task ID, registers the job payload in the BullMQ queue backed by Redis, and immediately responds to the client with the tracking ID.',
+          badge: 'Scheduling',
+        },
+        {
+          step: 3,
+          title: 'Asynchronous Worker Ingestion',
+          description: 'An idle worker node pulls the task from the Redis queue, transitions state to active, and creates an isolated temporary working directory for processing.',
+          badge: 'Execution',
+        },
+        {
+          step: 4,
+          title: 'FFmpeg Multi-Resolution Transcoding',
+          description: 'FFmpeg processes the source file into 360p, 720p, and 1080p formats while maintaining aspect ratio, emitting stderr timecode ticks.',
+          badge: 'Transcoding',
+        },
+        {
+          step: 5,
+          title: 'Real-Time Telemetry via Redis Pub/Sub',
+          description: 'Worker computes percentage completion from FFmpeg frames and publishes progress events to Redis Pub/Sub. The Socket.IO server pushes live progress to the user.',
+          badge: 'Feedback',
+        },
+        {
+          step: 6,
+          title: 'Cloudinary CDN Storage & Finalization',
+          description: 'Transcoded files are securely uploaded to Cloudinary. Worker marks the job complete in Redis and emits the final playable streaming URLs.',
+          badge: 'Egress',
+        },
+      ],
+      realTimeCommunication: {
+        overview:
+          'To keep the frontend updated without repetitive HTTP polling, the platform employs a publish-subscribe signaling topology.',
+        protocol: 'WebSockets via Socket.IO + Redis Pub/Sub',
+        flow: [
+          'Worker node captures FFmpeg encoding progress from child process stderr stream.',
+          'Worker publishes formatted progress JSON: { jobId, percent, currentFps, resolution } to Redis Pub/Sub channel.',
+          'Socket.IO signaling service subscribes to the channel and routes the event to the specific client room matching the user/job ID.',
+          'Client UI updates the progress ring and dynamic stage indicator with sub-second responsiveness.',
+        ],
+      },
+      challenges: [
+        {
+          challenge: 'Preventing Node.js event-loop starvation during intensive video encoding tasks.',
+          resolution: 'Isolated transcoding workloads entirely into standalone background worker processes spawned via BullMQ workers, ensuring the Express API gateway responds in <20ms.',
+        },
+        {
+          challenge: 'Preserving aspect ratios across varying video orientations and odd pixel dimensions.',
+          resolution: 'Constructed custom FFmpeg filter graphs (`scale=w:h:force_original_aspect_ratio=decrease,pad=w:h:...`) ensuring uniform video output without distortion.',
+        },
+        {
+          challenge: 'Synchronizing job status across distributed worker instances.',
+          resolution: 'Utilized Redis as a single source of truth for job lifecycle state and leveraged Redis Pub/Sub for cross-service real-time event broadcasting.',
+        },
+      ],
+    },
+  },
+  {
+    id: 'decortrove-ecommerce-platform',
+    title: 'DecorTrove — E-commerce Platform',
+    subtitle: 'Full-Stack Home Decor Marketplace & Administration Suite',
+    shortDescription:
+      'A full-stack modern e-commerce platform featuring JWT authentication, role-based access control, automated checkout workflows, and an administrative inventory dashboard.',
+    featuredBadge: 'Full-Stack & E-Commerce',
+    tags: [
+      'React.js',
+      'Redux Toolkit',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+      'Razorpay',
+      'Cloudinary',
+      'JWT',
+    ],
+    metrics: [
+      { label: 'Asset Optimization', value: '+40% Page Speed' },
+      { label: 'Security', value: 'JWT & RBAC' },
+      { label: 'Payments', value: 'Razorpay Gateway' },
+    ],
+    keyFeatures: [
+      'Robust JWT Authentication with secure HTTP-only cookies and token refresh flow',
+      'Role-Based Access Control (RBAC) separating Customer and Administrator privileges',
+      'Centralized client state management using Redux Toolkit with slice architecture',
+      'Seamless Razorpay payment gateway integration with webhook order verification',
+      'Comprehensive order processing lifecycle (Pending, Confirmed, Shipped, Delivered)',
+      'Dynamic shopping cart with real-time price, discount, and stock recalculation',
+      'Persistent Wishlist functionality tied to authenticated customer profiles',
+      'Full-featured Admin Dashboard with sales analytics and customer order overviews',
+      'Dynamic inventory management enabling real-time product creation, edits, and stock controls',
+      'Cloudinary media optimization pipeline with responsive image transformations',
+    ],
+    architectureHighlights: [
+      'Layered MVC backend architecture with strict controller, service, and data model separation',
+      'Optimized media asset delivery through Cloudinary, improving frontend page load speeds by 40%',
+      'Atomic MongoDB database transactions ensuring stock decrement consistency on checkout',
+      'Normalized Redux Toolkit state structure minimizing redundant client re-renders',
+    ],
+    githubUrl: 'https://github.com/Arbaazhasan/Decor-Trove',
+    liveUrl: 'https://client-livid-iota-e4019c1kek.vercel.app',
+    caseStudy: {
+      problemStatement:
+        'Modern e-commerce applications require high transactional reliability, snappy asset delivery, seamless payment workflows, and strict separation between regular consumer shopping experiences and privileged administrative inventory management.',
+      solutionOverview:
+        'Engineered DecorTrove as a production-grade MERN architecture with Redux Toolkit for predictable state management, Razorpay for automated checkout, and Cloudinary image transformations. Implemented fine-grained Role-Based Access Control (RBAC) to protect administrative endpoints, and established atomic inventory validation to guarantee checkout consistency.',
+      architectureDescription:
+        'DecorTrove is structured around a classic MVC backend pattern coupled with a modular React frontend. The Express application enforces authentication and authorization middleware at every sensitive endpoint. Media assets uploaded by administrators are processed and transformed on-the-fly via Cloudinary, delivering compressed WebP formats with responsive srcsets that cut load times by 40%.',
+      architectureNodes: [
+        {
+          id: 'storefront-ui',
+          name: 'Customer Storefront',
+          role: 'Browse & Checkout',
+          iconName: 'ShoppingBag',
+          tech: 'React, Redux Toolkit, Tailwind',
+          details: 'Catalog browsing, search & filters, product details, cart, and checkout flow.',
+        },
+        {
+          id: 'admin-portal',
+          name: 'Admin Dashboard',
+          role: 'Management Portal',
+          iconName: 'ShieldCheck',
+          tech: 'React, Redux Toolkit',
+          details: 'Privileged interface for inventory updates, stock management, and order status fulfillment.',
+        },
+        {
+          id: 'express-mvc',
+          name: 'Express MVC Server',
+          role: 'Application Core',
+          iconName: 'Server',
+          tech: 'Node.js, Express',
+          details: 'RESTful API controllers, business logic services, and security middleware.',
+        },
+        {
+          id: 'auth-layer',
+          name: 'JWT & RBAC Gate',
+          role: 'Access Control',
+          iconName: 'Key',
+          tech: 'JSON Web Tokens, bcrypt',
+          details: 'Validates tokens and enforces permissions across customer and admin routes.',
+        },
+        {
+          id: 'razorpay-gateway',
+          name: 'Payment Processing',
+          role: 'Financial Transactions',
+          iconName: 'CreditCard',
+          tech: 'Razorpay API & Webhooks',
+          details: 'Processes transactions securely and verifies server-side cryptographic signatures.',
+        },
+        {
+          id: 'mongodb-cluster',
+          name: 'MongoDB Database',
+          role: 'Data Persistence',
+          iconName: 'Database',
+          tech: 'MongoDB, Mongoose',
+          details: 'Stores users, products, categories, orders, and transactional histories.',
+        },
+        {
+          id: 'cloudinary-cdn',
+          name: 'Cloudinary Media CDN',
+          role: 'Asset Optimization',
+          iconName: 'Image',
+          tech: 'Cloudinary API',
+          details: 'Automated compression, dynamic format negotiation (WebP/AVIF), and CDN caching.',
+        },
+      ],
+      technologyDecisions: [
+        {
+          technology: 'Redux Toolkit',
+          reason: 'Provides a single predictable store for shopping cart, user auth state, and cached catalog queries with minimal boilerplate.',
+          tradeoff: 'Slightly higher initial boilerplate compared to raw Context, but vastly superior for complex multi-step checkout state.',
+        },
+        {
+          technology: 'Razorpay Integration',
+          reason: 'Provides a trusted payment gateway experience in India with robust sandbox testing and cryptographic webhook verification.',
+          tradeoff: 'Requires strict backend webhook verification to handle edge-case network dropouts during checkout.',
+        },
+        {
+          technology: 'Cloudinary Image Pipeline',
+          reason: 'Automatically optimizes heavy home decor photography, delivering 40% faster initial page load speeds.',
+          tradeoff: 'Adds an external third-party API dependency for media storage.',
+        },
+        {
+          technology: 'MongoDB & Mongoose Schema',
+          reason: 'Flexible schema accommodating polymorphic product specifications, nested order items, and dynamic catalog attributes.',
+          tradeoff: 'Requires disciplined schema validation at the Mongoose layer to maintain data integrity.',
+        },
+      ],
+      processingWorkflow: [
+        {
+          step: 1,
+          title: 'Catalog Browsing & Asset Fetching',
+          description: 'User navigates decor collections. Assets are loaded via Cloudinary CDN using optimized responsive parameters.',
+          badge: 'Discovery',
+        },
+        {
+          step: 2,
+          title: 'Cart & Wishlist Mutation',
+          description: 'Redux Toolkit manages instant local UI feedback for cart modifications while syncing changes to user sessions.',
+          badge: 'Cart State',
+        },
+        {
+          step: 3,
+          title: 'Order Initiation & Stock Lock',
+          description: 'Checkout validates item quantities against real-time MongoDB inventory before opening the payment session.',
+          badge: 'Validation',
+        },
+        {
+          step: 4,
+          title: 'Razorpay Transaction Execution',
+          description: 'Razorpay checkout modal processes payment and returns signature hash to the backend verification endpoint.',
+          badge: 'Payment',
+        },
+        {
+          step: 5,
+          title: 'Cryptographic Signature Verification',
+          description: 'Server validates HMAC SHA256 payment signature, decrements stock atomically, and records the order.',
+          badge: 'Verification',
+        },
+        {
+          step: 6,
+          title: 'Order Fulfillment & Admin Dispatch',
+          description: 'Order status transitions to Confirmed. Administrators can inspect, update tracking status, and adjust stock levels.',
+          badge: 'Fulfillment',
+        },
+      ],
+      realTimeCommunication: {
+        overview:
+          'Order updates and inventory stock adjustments are validated with transactional queries, ensuring accurate real-time inventory counts.',
+        protocol: 'RESTful API with Redux Optimistic Updates',
+        flow: [
+          'Client dispatches action to Redux store.',
+          'Axios sends authenticated request with Bearer JWT.',
+          'Express validates token and queries MongoDB with indexed keys.',
+          'Response updates store, triggering smooth component re-renders.',
+        ],
+      },
+      challenges: [
+        {
+          challenge: 'High image payload sizes slowing down mobile storefront performance.',
+          resolution: 'Integrated Cloudinary dynamic quality and format transformations (`f_auto,q_auto`), cutting initial payload sizes and boosting page load speed by 40%.',
+        },
+        {
+          challenge: 'Preventing concurrent checkout race conditions on low-stock items.',
+          resolution: 'Implemented atomic MongoDB queries (`findOneAndUpdate` with `$gte` stock condition) ensuring an item cannot be oversold.',
+        },
+        {
+          challenge: 'Protecting admin operations from unauthorized customer access.',
+          resolution: 'Architected layered RBAC middleware in Express that checks user roles embedded in cryptographically signed JWT tokens before executing administrative routes.',
+        },
+      ],
+    },
+  },
+];
