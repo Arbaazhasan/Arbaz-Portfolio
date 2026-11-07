@@ -110,6 +110,5 @@ export interface ContactFormData {
   reason?: string;
   subject: string;
   message: string;
-  company_fax?: string; // honeypot
-  website_trap?: string; // honeypot
+  botcheck?: boolean;
 }

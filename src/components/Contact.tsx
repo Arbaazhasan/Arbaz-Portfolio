@@ -20,8 +20,6 @@ export const Contact: React.FC = () => {
     reason: 'Full-Time Opportunity',
     subject: '',
     message: '',
-    company_fax: '', // honeypot
-    website_trap: '', // honeypot
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -89,17 +87,21 @@ export const Contact: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const payload = {
+      const payload: Record<string, string> = {
         access_key: 'b04ad689-8a47-4a35-a55a-38639fe7dcee',
         name: formData.name.trim(),
         email: formData.email.trim(),
         company: formData.company?.trim() || 'N/A',
         reason: formData.reason || 'Full-Time Opportunity',
-        subject: formData.subject.trim(),
+        subject: `[Portfolio Inquiry] ${formData.subject.trim()}`,
         message: formData.message.trim(),
         from_name: `${formData.name.trim()} (Portfolio Contact)`,
-        botcheck: formData.company_fax || formData.website_trap || '',
       };
+
+      // Only attach botcheck if the invisible honeypot checkbox was actually ticked by a bot
+      if (formData.botcheck) {
+        payload.botcheck = 'true';
+      }
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -125,8 +127,6 @@ export const Contact: React.FC = () => {
           reason: 'Full-Time Opportunity',
           subject: '',
           message: '',
-          company_fax: '',
-          website_trap: '',
         });
       } else {
         setSubmitStatus({
@@ -312,28 +312,17 @@ export const Contact: React.FC = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                {/* Honeypot Fields (Hidden to real humans, traps bots) */}
-                <div className="hidden" aria-hidden="true">
-                  <label htmlFor="company_fax">Leave this field blank</label>
-                  <input
-                    type="text"
-                    id="company_fax"
-                    name="company_fax"
-                    value={formData.company_fax}
-                    onChange={handleChange}
-                    tabIndex={-1}
-                    autoComplete="off"
-                  />
-                  <input
-                    type="text"
-                    id="website_trap"
-                    name="website_trap"
-                    value={formData.website_trap}
-                    onChange={handleChange}
-                    tabIndex={-1}
-                    autoComplete="off"
-                  />
-                </div>
+                {/* Invisible Honeypot Checkbox for Spam Protection */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  checked={!!formData.botcheck}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, botcheck: e.target.checked }))}
+                  className="hidden"
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
 
                 {/* Name & Email Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
