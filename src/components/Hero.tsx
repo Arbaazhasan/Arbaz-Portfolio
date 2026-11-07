@@ -147,11 +147,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCaseStudy }) => {
                 {/* Quick Email Copy Button */}
                 <button
                   onClick={handleCopyEmail}
-                  className={`inline-flex items-center justify-center px-3 sm:px-4 py-3 sm:py-3.5 rounded-2xl font-mono text-xs font-semibold border transition-all duration-200 gap-1.5 sm:gap-2 ${
-                    copied
+                  className={`inline-flex items-center justify-center px-3 sm:px-4 py-3 sm:py-3.5 rounded-2xl font-mono text-xs font-semibold border transition-all duration-200 gap-1.5 sm:gap-2 ${copied
                       ? 'bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/25'
                       : 'glass-panel text-slate-600 dark:text-slate-300 border-black/10 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20'
-                  }`}
+                    }`}
                   title="Click to copy email address"
                 >
                   {copied ? (

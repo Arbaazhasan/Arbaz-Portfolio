@@ -24,13 +24,11 @@ export const Contact: React.FC = () => {
     website_trap: '', // honeypot
   });
 
-  const [formLoadTimestamp] = useState<number>(() => Date.now());
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: 'idle' | 'success' | 'error';
     message: string;
-    isMock?: boolean;
   }>({ type: 'idle', message: '' });
 
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
@@ -92,14 +90,22 @@ export const Contact: React.FC = () => {
 
     try {
       const payload = {
-        ...formData,
-        submission_time: formLoadTimestamp,
+        access_key: 'b04ad689-8a47-4a35-a55a-38639fe7dcee',
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        company: formData.company?.trim() || 'N/A',
+        reason: formData.reason || 'Full-Time Opportunity',
+        subject: formData.subject.trim(),
+        message: formData.message.trim(),
+        from_name: `${formData.name.trim()} (Portfolio Contact)`,
+        botcheck: formData.company_fax || formData.website_trap || '',
       };
 
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify(payload),
       });
@@ -110,7 +116,6 @@ export const Contact: React.FC = () => {
         setSubmitStatus({
           type: 'success',
           message: data.message || 'Thank you! Your message has been sent successfully.',
-          isMock: data.isMock,
         });
         // Reset form fields
         setFormData({
@@ -127,7 +132,7 @@ export const Contact: React.FC = () => {
         setSubmitStatus({
           type: 'error',
           message:
-            data.error ||
+            data.message ||
             'Failed to dispatch message. Please try again or email directly at arbaazhasan.ah@gmail.com.',
         });
       }
@@ -135,7 +140,7 @@ export const Contact: React.FC = () => {
       setSubmitStatus({
         type: 'error',
         message:
-          'Network connection error. Please ensure backend server is active, or reach out directly at arbaazhasan.ah@gmail.com.',
+          'Network connection error. Please try again or reach out directly at arbaazhasan.ah@gmail.com.',
       });
     } finally {
       setIsSubmitting(false);
@@ -302,11 +307,6 @@ export const Contact: React.FC = () => {
                       {submitStatus.type === 'success' ? 'Transmission Successful' : 'Submission Alert'}
                     </span>
                     <p>{submitStatus.message}</p>
-                    {submitStatus.isMock && (
-                      <span className="text-[11px] opacity-80 mt-1 block">
-                        (Development notice: Recorded in local server console. Enter SMTP credentials in server/.env for live dispatch.)
-                      </span>
-                    )}
                   </div>
                 </div>
               )}
